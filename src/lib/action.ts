@@ -31,7 +31,7 @@ export const saveContact = async (prevSate: any, formData: FormData) => {
     redirect("/contacts")
 }
 
-export const updateContact = async (id:string, prevSate: any, formData: FormData) => {
+export const updateContact = async (id: string, prevSate: any, formData: FormData) => {
     const validatedFields = ContactSchema.safeParse(Object.fromEntries(formData.entries()));
     if (!validatedFields.success) {
         return {
@@ -44,11 +44,22 @@ export const updateContact = async (id:string, prevSate: any, formData: FormData
                 name: validatedFields.data.name,
                 keperluan: validatedFields.data.keperluan,
             },
-            where:{id}
+            where: { id }
         })
     } catch (error) {
         return { message: "Gagal melakukan pembaruan keperluan" }
     }
     revalidatePath("/contacts");
     redirect("/contacts")
+}
+
+export const deleteContact = async (id: string) => {
+    try {
+        await prisma.contacts.delete({
+            where: { id }
+        })
+    } catch (error) {
+        return { message: "Gagal menghapus keperluan" }
+    }
+    revalidatePath("/contacts");
 }

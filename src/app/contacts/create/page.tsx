@@ -1,5 +1,4 @@
 import CreateForm from '@/components/create-form'
-import React from 'react'
 
 const CreateContactPage = () => {
   return (

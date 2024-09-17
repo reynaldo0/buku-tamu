@@ -14,9 +14,9 @@ export const CreateButton = () => {
     )
 }
 
-export const EditButton = () => {
+export const EditButton = ({ id }: { id: string }) => {
     return (
-        <Link href="/contacts/create" className="rounded-sm border p-1 hover:bg-gray-100">
+        <Link href={`/contacts/edit/${id}`} className="rounded-sm border p-1 hover:bg-gray-100">
             <IoPencil size={20} />
         </Link>
     )
@@ -29,17 +29,17 @@ export const DeleteButton = () => {
     )
 }
 
-export const SubmitButton = ({label} : {label:string}) => {
-    const {pending} = useFormStatus();
-    const className = clsx("text-white bg-blue-700 hover:to-blue-800 font-medium rounded-sm text-sm w-full px-5 py-3 text-center",{
-        "opacity-50 cursor-progress" : pending
+export const SubmitButton = ({ label }: { label: string }) => {
+    const { pending } = useFormStatus();
+    const className = clsx("text-white bg-blue-700 hover:to-blue-800 font-medium rounded-sm text-sm w-full px-5 py-3 text-center", {
+        "opacity-50 cursor-progress": pending
     })
 
     return (
-        <button type="submit" className={className} disabled={pending}>{label == "save"?(
-            <span>{pending ? "Menyimpan...": "Simpan"}</span>
-        ):(
-            <span>{pending ? "Memperbarui...": "Perbaharui"}</span>
+        <button type="submit" className={className} disabled={pending}>{label == "save" ? (
+            <span>{pending ? "Menyimpan..." : "Simpan"}</span>
+        ) : (
+            <span>{pending ? "Memperbarui..." : "Perbaharui"}</span>
         )}</button>
     )
 }

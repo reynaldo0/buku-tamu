@@ -30,3 +30,25 @@ export const saveContact = async (prevSate: any, formData: FormData) => {
     revalidatePath("/contacts");
     redirect("/contacts")
 }
+
+export const updateContact = async (id:string, prevSate: any, formData: FormData) => {
+    const validatedFields = ContactSchema.safeParse(Object.fromEntries(formData.entries()));
+    if (!validatedFields.success) {
+        return {
+            Error: validatedFields.error.flatten().fieldErrors
+        }
+    }
+    try {
+        await prisma.contacts.update({
+            data: {
+                name: validatedFields.data.name,
+                keperluan: validatedFields.data.keperluan,
+            },
+            where:{id}
+        })
+    } catch (error) {
+        return { message: "Gagal melakukan pembaruan keperluan" }
+    }
+    revalidatePath("/contacts");
+    redirect("/contacts")
+}

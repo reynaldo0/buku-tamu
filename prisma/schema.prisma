@@ -14,9 +14,9 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model Contacts{
-  id String @id @default(cuid())
-  name String
+model Contacts {
+  id        String   @id @default(cuid())
+  name      String
   keperluan String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

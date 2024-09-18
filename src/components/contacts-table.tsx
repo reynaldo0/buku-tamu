@@ -2,8 +2,8 @@ import { getContacts } from "@/lib/data"
 import { formatDate } from "@/lib/utils";
 import { DeleteButton, EditButton } from "./buttons";
 
-const ContactsTable = async () => {
-    const contacts = await getContacts();
+const ContactsTable = async ({ query, currentPage }: { query: string; currentPage: Number }) => {
+    const contacts = await getContacts(query, currentPage);
     return (
         <table className="w-full text-sm text-left text-gray-500">
             <thead className="text-sm text-gray-700 uppercase bg-gray-50">
@@ -23,8 +23,8 @@ const ContactsTable = async () => {
                         <td className="py-3 px-6 break-words">{contacts.keperluan}</td>
                         <td className="py-3 px-6">{formatDate(contacts.createdAt.toString())}</td>
                         <td className="flex justify-center gap-1 py-3">
-                            <EditButton id={contacts.id}/>
-                            <DeleteButton id={contacts.id}/>
+                            <EditButton id={contacts.id} />
+                            <DeleteButton id={contacts.id} />
                         </td>
                     </tr>
                 ))}

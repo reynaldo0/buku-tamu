@@ -15,7 +15,7 @@ const Contacts = ({
   const currentPage = Number(searchParams?.page) || 1;
 
   return (
-    <div className="max-w-screen-lg mx-auto mt-5">
+    <div className="max-w-screen-lg mx-auto mt-5 px-5 md:px-0">
         <div className="flex items-center justify-between gap-1 mb-5">
             <Search/>
             <CreateButton/>

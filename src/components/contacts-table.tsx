@@ -2,7 +2,7 @@ import { getContacts } from "@/lib/data";
 import { formatDate } from "@/lib/utils";
 import { DeleteButton, EditButton } from "./buttons";
 
-const ContactsTable = async ({ query, currentPage }: { query: string; currentPage: Number }) => {
+const ContactsTable = async ({ query, currentPage }: { query: string; currentPage: number }) => {
     const contacts = await getContacts(query, currentPage);
     return (
         <div>

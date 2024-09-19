@@ -4,10 +4,10 @@ import Search from "@/components/search"
 import { getContactsPages } from "@/lib/data"
 import Pagination from "@/components/pagination"
 
-const Contacts = async({
+const Contacts = async ({
   searchParams
-}:{
-  searchParams?:{
+}: {
+  searchParams?: {
     query?: string;
     page?: string;
   }
@@ -20,12 +20,14 @@ const Contacts = async({
 
   return (
     <div className="max-w-screen-lg mx-auto mt-5 px-5 md:px-0">
-        <div className="flex items-center justify-between gap-1 mb-5">
-            <Search/>
-            <CreateButton/>
-        </div>
-        <ContactsTable query={query} currentPage={currentPage}/>
-        <Pagination totalPages={totalPages}/>
+      <div className="flex items-center justify-between gap-1 mb-5">
+        <Search />
+        <CreateButton />
+      </div>
+      <ContactsTable query={query} currentPage={currentPage} />
+      <div className="flex justify-center mt-4">
+        <Pagination totalPages={totalPages} />
+      </div>
     </div>
   )
 }

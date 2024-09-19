@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { number } from "zod";
+import { resolve } from "path";
+import { number, promise } from "zod";
 
 const ITEM_PER_PAGE = 5;
 
@@ -7,6 +8,7 @@ export const getContacts = async (query: string, currentPage: number) => {
     const offset = (currentPage - 1) * ITEM_PER_PAGE
 
     try {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
         const contacts = await prisma.contacts.findMany({
             skip: offset,
             take: ITEM_PER_PAGE,

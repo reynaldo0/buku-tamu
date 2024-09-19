@@ -15,6 +15,15 @@ export const CreateButton = () => {
     )
 }
 
+export const TamuButton = () => {
+    return (
+        <Link href="/tamu" className="inline-flex items-center space-x-1 text-white bg-blue-700 hover:bg-blue-800 px-5 py-[20px] rounded-xl text-xl gap-2">
+            <IoAddSharp size={30} />
+            Buat Tamu Baru
+        </Link>
+    )
+}
+
 export const EditButton = ({ id }: { id: string }) => {
     return (
         <Link href={`/tamu/edit/${id}`} className="rounded-sm border p-1 hover:bg-gray-100">

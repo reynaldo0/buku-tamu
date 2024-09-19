@@ -2,6 +2,7 @@
 
 import { IoSearch } from "react-icons/io5"
 import { useSearchParams, usePathname, useRouter } from "next/navigation"
+import { useDebouncedCallback } from "use-debounce"
 
 const Search = () => {
 
@@ -9,8 +10,9 @@ const Search = () => {
   const pathName = usePathname();
   const { replace } = useRouter();
 
-  const handleSearch = (term: string) => {
-    console.log(term)
+  const handleSearch = useDebouncedCallback((term: string) => {
+    console.log(term);
+
     const params = new URLSearchParams(searchParams);
     if (term) {
       params.set("query", term)
@@ -18,7 +20,7 @@ const Search = () => {
       params.delete("query")
     }
     replace(`${pathName}?${params.toString()}`);
-  }
+  }, 300)
   return (
     <div className="relative flex flex-1">
       <input type="text" className="w-full border border-gray-200 py-2 pl-10 text-sm outline-2 rounded-sm" placeholder="Search..." onChange={(e) => handleSearch(e.target.value)} defaultValue={searchParams.get("query")?.toString()} />

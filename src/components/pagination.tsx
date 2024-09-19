@@ -4,6 +4,7 @@ import Link from "next/link";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import { usePathname, useSearchParams } from "next/navigation";
 import clsx from "clsx";
+import { generatePagination } from "@/lib/utils";
 
 const Pagination = ({ totalPages }: { totalPages: number }) => {
     const pathName = usePathname();
@@ -16,7 +17,7 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
         return (`${pathName}?${params.toString()}`)
     }
 
-    const allPages = generatePagenation(currentPath, totalPages)
+    const allPages = generatePagination(currentPath, totalPages)
 
     const PaginationNumber = ({
         page,
@@ -25,10 +26,9 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
         isActive
     }: {
         page: number | string;
-        href: string
-        position: "first" | "last" | "middle" | "single"
-        isActive: boolean
-
+        href: string;
+        position: "first" | "last" | "middle" | "single";
+        isActive: boolean;
     }) => {
         const className = clsx("flex h-10 w-10 items-center justify-center text-sm border", {
             "rounded-l-sm": position === "first" || position === "single",
@@ -47,11 +47,11 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
     const PaginationArrow = ({
         href,
         direction,
-        isDisabled
+        isDisabled,
     }: {
         href: string;
         direction: "left" | "right";
-        isDisable?: boolean;
+        isDisabled?: boolean;
     }) => {
         const className = clsx("flex h-10 w-10 items-center justify-center text-sm border",
             {
@@ -75,8 +75,25 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
     }
 
     return (
-        <div>Pagination</div>
+        <div className="inline-flex">
+            <PaginationArrow direction="left" href={createPageURL(currentPath - 1)} isDisabled={currentPath <= 1} />
+            <div className="flex -space-x-px">
+                {allPages.map((page, index) => {
+                    let position: "first" | "last" | "single" | "middle";
+
+                    if (index === 0) position = "first";
+                    else if (index === allPages.length - 1) position = "last";
+                    else if (page === "...") position = "middle";
+                    else position = "single";
+
+                    return (
+                        <PaginationNumber key={index} href={createPageURL(page)} page={page} position={position} isActive={currentPath === page} />
+                    )
+                })}
+            </div>
+            <PaginationArrow direction="right" href={createPageURL(currentPath + 1)} isDisabled={currentPath >= totalPages} />
+        </div>
     )
 }
 
-export default Pagination
+export default Pagination;

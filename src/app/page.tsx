@@ -4,9 +4,9 @@ import { FlipWords } from "@/components/flip-words";
 import React from "react";
 
 const words = [
-  "Let's take a look at our team biography!",
-  "Get to know the inspiring team behind our site!",
-  "Meet the creative team behind this art project!"
+  "Selamat Datang!",
+  "Buatlah Daftar Tamu Anda!",
+  "Listlah Tamu Anda Sekarang!"
 ];
 
 const Home: React.FC = () => {
@@ -17,7 +17,7 @@ const Home: React.FC = () => {
         backgroundImage: `url(/bg.jpeg)`,
       }}
     >
-      <div className="absolute inset-0 bg-blue-950 opacity-75"></div>
+      <div className="absolute inset-0 bg-black opacity-75"></div>
       <div className="absolute bottom-0 left-0 w-full h-60 via-white/20 to-transparent"></div>
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white p-4">

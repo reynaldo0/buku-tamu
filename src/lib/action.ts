@@ -27,8 +27,8 @@ export const saveContact = async (prevSate: any, formData: FormData) => {
     } catch (error) {
         return { message: "Gagal melakukan pembuatan keperluan" }
     }
-    revalidatePath("/tamu");
-    redirect("/tamu")
+    revalidatePath("/");
+    redirect("/")
 }
 
 export const updateContact = async (id: string, prevSate: any, formData: FormData) => {
@@ -49,8 +49,8 @@ export const updateContact = async (id: string, prevSate: any, formData: FormDat
     } catch (error) {
         return { message: "Gagal melakukan pembaruan keperluan" }
     }
-    revalidatePath("/tamu");
-    redirect("/tamu")
+    revalidatePath("/");
+    redirect("/")
 }
 
 export const deleteContact = async (id: string) => {
@@ -61,5 +61,5 @@ export const deleteContact = async (id: string) => {
     } catch (error) {
         return { message: "Gagal menghapus keperluan" }
     }
-    revalidatePath("/tamu");
+    revalidatePath("/");
 }
